@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <!-- Ledge/surface the character hides behind -->
+  <path d="M 40,155 Q 80,148 120,150 Q 160,152 200,150 Q 240,148 280,150 Q 320,152 360,155" 
+        stroke="#1a1a1a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  
+  <!-- Head dome - peeking over -->
+  <path d="M 120,150 Q 120,80 200,70 Q 280,80 280,150" 
+        stroke="#1a1a1a" stroke-width="6" fill="#1a1a1a" stroke-linejoin="round"/>
+  
+  <!-- Face cutout (lighter area inside head) -->
+  <path d="M 130,150 Q 130,90 200,82 Q 270,90 270,150" 
+        fill="white"/>
+  
+  <!-- Left eye - round, fully above ledge -->
+  <circle cx="170" cy="120" r="16" fill="#1a1a1a"/>
+  <circle cx="165" cy="114" r="4" fill="white"/>
+  
+  <!-- Right eye - round, fully above ledge -->
+  <circle cx="230" cy="120" r="16" fill="#1a1a1a"/>
+  <circle cx="225" cy="114" r="4" fill="white"/>
+  
+  <!-- Left paw -->
+  <ellipse cx="115" cy="152" rx="18" ry="10" fill="#1a1a1a" stroke="white" stroke-width="2"/>
+  
+  <!-- Right paw -->
+  <ellipse cx="285" cy="152" rx="18" ry="10" fill="#1a1a1a" stroke="white" stroke-width="2"/>
+</svg>
