@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+/* -------------------------
+   Base
+   ------------------------- */
 
 html {
   scroll-behavior: smooth;
@@ -11,26 +13,73 @@ html {
 body {
   background: #0a0a0a;
   color: #e8e8e8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
   background: rgba(184, 147, 90, 0.3);
 }
 
-.glow {
-  box-shadow: 0 0 60px rgba(184, 147, 90, 0.08);
+/* Screen-reader-only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* -------------------------
+   Hero entrance animations
+   (play once on page load)
+   ------------------------- */
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.animate-fade-up {
-  animation: fade-up 0.8s ease-out forwards;
+.hero-fade {
+  animation: hero-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
 
-.animate-fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
-.animate-fade-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
-.animate-fade-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
-.animate-fade-up-delay-4 { animation-delay: 0.4s; opacity: 0; }
+.hero-fade-1 {
+  animation-delay: 0.05s;
+}
+.hero-fade-2 {
+  animation-delay: 0.15s;
+}
+.hero-fade-3 {
+  animation-delay: 0.3s;
+}
+.hero-fade-4 {
+  animation-delay: 0.45s;
+}
+
+/* -------------------------
+   Reduced motion preference
+   ------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-fade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
