@@ -27,35 +27,22 @@ const rows = [
   },
   {
     style: 'text-sm sm:text-base text-neutral-500',
-    chunks: [{ text: "Something that mattered to someone.", pause: 1000, fade: FADE.slow }],
+    chunks: [{ text: "Something that mattered to someone close.", pause: 1000, fade: FADE.slow }],
   },
   { spacer: 'h-3', pause: 1200 },
   {
     style: 'text-sm sm:text-base text-neutral-500',
-    chunks: [{ text: "Your mate's been quiet for three days.", pause: 1200, fade: FADE.normal }],
+    chunks: [{ text: "Your friend had a big interview.", pause: 1200, fade: FADE.normal }],
   },
   {
     style: 'text-sm sm:text-base text-neutral-500',
-    chunks: [{ text: "You meant to check in.", pause: 1200, fade: FADE.normal }],
+    chunks: [{ text: "You meant to wish them luck.", pause: 1200, fade: FADE.normal }],
   },
   {
     style: 'text-sm sm:text-base text-neutral-500',
     chunks: [{ text: "You forgot.", pause: 1800, fade: FADE.slow }],
   },
   { spacer: 'h-3', pause: 1000 },
-  {
-    style: 'text-sm sm:text-base text-neutral-500',
-    chunks: [{ text: "Your mum called twice last week.", pause: 1200, fade: FADE.normal }],
-  },
-  {
-    style: 'text-sm sm:text-base text-neutral-500',
-    chunks: [{ text: "You saw the notifications.", pause: 1200, fade: FADE.normal }],
-  },
-  {
-    style: 'text-sm sm:text-base text-neutral-500',
-    chunks: [{ text: "You still haven't called her back.", pause: 1800, fade: FADE.slow }],
-  },
-  { spacer: 'h-3', pause: 1200 },
   {
     style: 'text-sm sm:text-base text-neutral-600',
     chunks: [{ text: "It's not that you don't care.", pause: 1400, fade: FADE.normal }],
@@ -67,12 +54,9 @@ const rows = [
   { spacer: 'h-4', pause: 1200 },
   {
     style: 'text-lg sm:text-xl text-neutral-300 font-light',
-    chunks: [{ text: "What if something was quietly paying attention", pause: 1200, fade: FADE.normal }],
+    chunks: [{ text: "What if something was quietly paying attention for you?", pause: 1200, fade: FADE.normal }],
   },
-  {
-    style: 'text-lg sm:text-xl text-neutral-300 font-light',
-    chunks: [{ text: "so you didn't have to?", pause: 2500, fade: FADE.slow }],
-  },
+
   { cta: true, pause: 1000, fade: FADE.slow },
 ]
 
@@ -138,17 +122,15 @@ export default function AntiLandingPage() {
         style={{ transitionDuration: `${ctaEntry?.fade ?? 1000}ms` }}
       >
         <p className="text-2xl sm:text-4xl text-neutral-200 font-light tracking-tight">Sotto</p>
-        <p className="text-neutral-500 text-xs italic">sotto voce — "in a quiet voice"</p>
         <p className="text-neutral-500 text-xs sm:text-sm max-w-xs mx-auto mt-3">
-          It reads your notifications. It learns who matters to you.
-          It remembers when you forget.
+          Remembers when you forget.
         </p>
         <div className="pt-5">
           <a href="/#beta" className="text-neutral-300 border border-neutral-700 px-5 py-2.5 rounded-full text-sm hover:bg-neutral-800 transition-colors">
             Join the beta
           </a>
         </div>
-        <p className="text-neutral-700 text-xs mt-4">Android only. Free.</p>
+        <p className="text-neutral-700 text-xs mt-4">Android only</p>
       </div>
     </div>
   )
