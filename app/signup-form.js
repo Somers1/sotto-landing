@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { submitBetaSignup } from './actions'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -28,10 +29,14 @@ export default function SignupForm() {
       setStatus('submitting')
       setErrorMessage('')
 
-      // Simulate API call — replace with real endpoint in production
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1200))
-        setStatus('success')
+        const result = await submitBetaSignup(trimmed)
+        if (result.error) {
+          setErrorMessage(result.error)
+          setStatus('error')
+        } else {
+          setStatus('success')
+        }
       } catch {
         setErrorMessage('Something went wrong. Please try again.')
         setStatus('error')
