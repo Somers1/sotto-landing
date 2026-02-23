@@ -29,29 +29,49 @@ const rows = [
     style: 'text-sm sm:text-base text-neutral-500',
     chunks: [{ text: "Something that mattered to someone.", pause: 1000, fade: FADE.slow }],
   },
+  { spacer: 'h-3', pause: 1200 },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "Your mate's been quiet for three days.", pause: 1200, fade: FADE.normal }],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "You meant to check in.", pause: 1200, fade: FADE.normal }],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "You forgot.", pause: 1800, fade: FADE.slow }],
+  },
   { spacer: 'h-3', pause: 1000 },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "Your mum called twice last week.", pause: 1200, fade: FADE.normal }],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "You saw the notifications.", pause: 1200, fade: FADE.normal }],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "You still haven't called her back.", pause: 1800, fade: FADE.slow }],
+  },
+  { spacer: 'h-3', pause: 1200 },
+  {
+    style: 'text-sm sm:text-base text-neutral-600',
+    chunks: [{ text: "It's not that you don't care.", pause: 1400, fade: FADE.normal }],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-600',
+    chunks: [{ text: "It's that life is loud and your attention is finite.", pause: 2000, fade: FADE.slow }],
+  },
+  { spacer: 'h-4', pause: 1200 },
   {
     style: 'text-lg sm:text-xl text-neutral-300 font-light',
-    chunks: [{ text: "Your phone already knows everything.", pause: 1000, fade: FADE.normal }],
+    chunks: [{ text: "What if something was quietly paying attention", pause: 1200, fade: FADE.normal }],
   },
-  { spacer: 'h-0', pause: 1000 },
   {
     style: 'text-lg sm:text-xl text-neutral-300 font-light',
-    chunks: [{ text: "It just doesn't care.", pause: 1000, fade: FADE.normal }],
-  },
-  { spacer: 'h-3', pause: 1000 },
-  {
-    style: 'text-xl sm:text-2xl text-neutral-200 font-light',
-    chunks: [{ text: "What if it did?", pause: 1000, fade: FADE.slow }],
-  },
-  { spacer: 'h-3', pause: 1000 },
-  {
-    style: 'text-neutral-400',
-    chunks: [{ text: "A quiet presence that pays attention", pause: 1000, fade: FADE.normal }],
-  },
-  {
-    style: 'text-neutral-400',
-    chunks: [{ text: "so you don't have to.", pause: 1000, fade: FADE.normal }],
+    chunks: [{ text: "so you didn't have to?", pause: 2500, fade: FADE.slow }],
   },
   { cta: true, pause: 1000, fade: FADE.slow },
 ]
@@ -118,16 +138,17 @@ export default function AntiLandingPage() {
         style={{ transitionDuration: `${ctaEntry?.fade ?? 1000}ms` }}
       >
         <p className="text-2xl sm:text-4xl text-neutral-200 font-light tracking-tight">Sotto</p>
+        <p className="text-neutral-500 text-xs italic">sotto voce — "in a quiet voice"</p>
         <p className="text-neutral-500 text-xs sm:text-sm max-w-xs mx-auto mt-3">
-          An AI that lives on your phone, reads your notifications,
-          and speaks up only when it has something worth saying.
+          It reads your notifications. It learns who matters to you.
+          It remembers when you forget.
         </p>
         <div className="pt-5">
           <a href="/#beta" className="text-neutral-300 border border-neutral-700 px-5 py-2.5 rounded-full text-sm hover:bg-neutral-800 transition-colors">
-            Let Sotto remember for you
+            Join the beta
           </a>
         </div>
-        <p className="text-neutral-700 text-xs mt-4">Android beta. Waitlist open.</p>
+        <p className="text-neutral-700 text-xs mt-4">Android only. Free.</p>
       </div>
     </div>
   )
