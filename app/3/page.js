@@ -2,10 +2,10 @@
 import { useEffect, useRef, useState } from 'react'
 
 const lines = [
-  { text: 'sotto voce', style: 'italic text-neutral-400 text-sm tracking-[0.3em]' },
+  { text: 'sotto', style: 'text-neutral-400 text-sm tracking-[0.3em]' },
   { text: '', spacer: true },
   { text: '', spacer: true },
-  { text: 'the quiet voice', style: 'text-neutral-300 text-2xl sm:text-3xl font-light' },
+  { text: 'your phone, paying attention.', style: 'text-neutral-300 text-2xl sm:text-3xl font-light' },
   { text: '', spacer: true },
   { text: '', spacer: true },
   { text: '', spacer: true },
@@ -101,7 +101,7 @@ export default function QuietPage() {
             href="/#beta"
             className="text-neutral-600 text-xs tracking-[0.2em] hover:text-neutral-400 transition-colors duration-1000"
           >
-            join the quiet →
+            join the beta →
           </a>
         </div>
 

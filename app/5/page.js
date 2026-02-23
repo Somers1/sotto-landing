@@ -86,7 +86,6 @@ export default function AntiLandingPage() {
       <div className={`transition-all duration-1000 ${revealed ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         <div className="flex flex-col items-center justify-center px-6 py-16 text-center space-y-4">
           <p className="text-3xl sm:text-5xl text-neutral-200 font-light tracking-tight">Sotto</p>
-          <p className="text-neutral-500 text-sm italic">sotto voce — "in a quiet voice"</p>
           <p className="text-neutral-500 text-sm max-w-xs mx-auto mt-4">
             An AI that lives on your phone, reads your notifications,
             and speaks up only when it has something worth saying.

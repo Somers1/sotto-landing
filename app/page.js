@@ -10,15 +10,7 @@ export default function Home() {
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 py-4 flex items-center justify-between">
-          <a
-            href="/"
-            className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-400/50 rounded-md"
-            aria-label="Sotto home"
-          >
-            <img src="/logo.svg" alt="" className="h-7 w-auto invert" aria-hidden="true" />
-            <span className="text-lg font-medium tracking-tight">Sotto</span>
-          </a>
+        <div className="max-w-6xl mx-auto  flex items-center justify-end">
           <a
             href="#beta"
             className="text-sm text-warm-200/70 hover:text-warm-200 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-400/50 rounded-md px-2 py-1"
@@ -31,9 +23,7 @@ export default function Home() {
       {/* Hero */}
       <section className="pt-36 sm:pt-44 pb-28 sm:pb-32 px-6 sm:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-warm-400 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase mb-6 hero-fade hero-fade-1">
-            Sotto voce
-          </p>
+
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08] hero-fade hero-fade-2">
             Your phone,<br />
             <span className="text-warm-200">paying attention</span>
@@ -148,18 +138,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 sm:px-8 border-t border-white/[0.06]" role="contentinfo">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-neutral-500 text-sm">
-            <img src="/logo.svg" alt="" className="h-5 w-auto invert opacity-40" aria-hidden="true" />
-            <span>Sotto</span>
-          </div>
-          <p className="text-neutral-600 text-xs">
-            The quiet voice.
-          </p>
-        </div>
-      </footer>
     </main>
   )
 }

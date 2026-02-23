@@ -95,8 +95,7 @@ export default function AnaloguePage() {
       <div className="max-w-lg mx-auto px-6 py-12">
         <div className="font-serif space-y-8" style={{ color: '#3d3428' }}>
           <p>
-            We called it Sotto because <em>sotto voce</em> means "the quiet voice." 
-            That's what it is. Not an assistant that shouts. A presence that whispers 
+            That's what Sotto is. Not an assistant that shouts. A presence that whispers 
             when it has something worth saying.
           </p>
 

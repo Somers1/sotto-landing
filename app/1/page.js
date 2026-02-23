@@ -35,7 +35,7 @@ function Message({ msg, visible }) {
   if (msg.type === 'cta') return (
     <div className="flex flex-col items-center py-12 animate-msg">
       <p className="text-neutral-500 text-sm mb-2">This is Sotto.</p>
-      <p className="text-neutral-400 text-lg mb-6">The quiet voice on your phone.</p>
+      <p className="text-neutral-400 text-lg mb-6">Your phone, paying attention.</p>
       <a href="/#beta" className="px-6 py-3 bg-white text-black rounded-full text-sm font-medium hover:bg-neutral-200 transition-colors">
         Join the beta
       </a>

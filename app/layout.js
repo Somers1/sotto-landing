@@ -1,19 +1,19 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Sotto — The quiet voice',
+  title: 'Sotto',
   description:
     'A quiet, attentive AI that lives on your Android phone. It reads your notifications, learns about your life, and speaks up when it matters.',
   keywords: ['AI', 'Android', 'notifications', 'assistant', 'ambient intelligence'],
   openGraph: {
-    title: 'Sotto — The quiet voice',
+    title: 'Sotto',
     description: 'Your phone, paying attention.',
     type: 'website',
     siteName: 'Sotto',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sotto — The quiet voice',
+    title: 'Sotto',
     description: 'Your phone, paying attention.',
   },
   robots: {
