@@ -1,113 +1,134 @@
 'use client'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
-const lines = [
-  { text: "When's the last time you forgot something important?", style: 'text-2xl sm:text-4xl text-neutral-300 font-light', pause: 2500 },
-  { text: "Not something huge. You'd remember that.", style: 'text-lg sm:text-xl text-neutral-500', pause: 2000 },
-  { text: "Something small.", style: 'text-lg sm:text-xl text-neutral-500', pause: 1200 },
-  { text: "Something that mattered to someone.", style: 'text-lg sm:text-xl text-neutral-500', pause: 2200 },
-  { text: "", style: 'h-4', pause: 800 },
-  { text: "Your friend mentioned they had a job interview today.", style: 'text-neutral-500', pause: 2000 },
-  { text: "Your partner asked you to grab milk.", style: 'text-neutral-500', pause: 1800 },
-  { text: "You said you'd call your mum back.", style: 'text-neutral-500', pause: 2000 },
-  { text: "", style: 'h-2', pause: 600 },
-  { text: "All of it was in your notifications.", style: 'text-neutral-600 text-sm', pause: 1800 },
-  { text: "You just... didn't connect the dots.", style: 'text-neutral-600 text-sm', pause: 2500 },
-  { text: "", style: 'h-6', pause: 1000 },
-  { text: "Your phone already knows everything.", style: 'text-xl sm:text-2xl text-neutral-300 font-light', pause: 2200 },
-  { text: "It just doesn't care.", style: 'text-xl sm:text-2xl text-neutral-300 font-light', pause: 2800 },
-  { text: "", style: 'h-6', pause: 800 },
-  { text: "What if it did?", style: 'text-2xl sm:text-3xl text-neutral-200 font-light', pause: 3000 },
-  { text: "", style: 'h-4', pause: 600 },
-  { text: "It's not a chatbot.", style: 'text-neutral-600', pause: 1400 },
-  { text: "It's not an assistant you have to talk to.", style: 'text-neutral-600', pause: 1600 },
-  { text: "It's not another app demanding your attention.", style: 'text-neutral-600', pause: 2200 },
-  { text: "", style: 'h-4', pause: 800 },
-  { text: "It's a quiet presence that pays attention", style: 'text-neutral-400', pause: 1800 },
-  { text: "so you don't have to.", style: 'text-neutral-400', pause: 3000 },
-  { type: 'reveal' },
+const FADE = {
+  fast: 300,
+  normal: 1000,
+  slow: 1200,
+}
+
+const rows = [
+  {
+    style: 'text-xl sm:text-2xl text-neutral-300 font-light',
+    chunks: [
+      { text: "When's the last time you forgot something important?", pause: 1000, fade: FADE.normal },
+    ],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [
+      { text: "Not something huge.", pause: 1500, fade: FADE.normal },
+      { text: "You'd remember that.", pause: 1000, fade: FADE.normal },
+    ],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "Something small.", pause: 1000, fade: FADE.normal }],
+  },
+  {
+    style: 'text-sm sm:text-base text-neutral-500',
+    chunks: [{ text: "Something that mattered to someone.", pause: 1000, fade: FADE.slow }],
+  },
+  { spacer: 'h-3', pause: 1000 },
+  {
+    style: 'text-lg sm:text-xl text-neutral-300 font-light',
+    chunks: [{ text: "Your phone already knows everything.", pause: 1000, fade: FADE.normal }],
+  },
+  { spacer: 'h-0', pause: 1000 },
+  {
+    style: 'text-lg sm:text-xl text-neutral-300 font-light',
+    chunks: [{ text: "It just doesn't care.", pause: 1000, fade: FADE.normal }],
+  },
+  { spacer: 'h-3', pause: 1000 },
+  {
+    style: 'text-xl sm:text-2xl text-neutral-200 font-light',
+    chunks: [{ text: "What if it did?", pause: 1000, fade: FADE.slow }],
+  },
+  { spacer: 'h-3', pause: 1000 },
+  {
+    style: 'text-neutral-400',
+    chunks: [{ text: "A quiet presence that pays attention", pause: 1000, fade: FADE.normal }],
+  },
+  {
+    style: 'text-neutral-400',
+    chunks: [{ text: "so you don't have to.", pause: 1000, fade: FADE.normal }],
+  },
+  { cta: true, pause: 1000, fade: FADE.slow },
 ]
 
+const sequence = []
+let chunkCount = 0
+rows.forEach((row, rowIdx) => {
+  if (row.spacer) {
+    sequence.push({ type: 'spacer', rowIdx, pause: row.pause })
+  } else if (row.cta) {
+    sequence.push({ type: 'cta', pause: row.pause, fade: row.fade })
+  } else {
+    row.chunks.forEach((chunk) => {
+      sequence.push({ type: 'chunk', rowIdx, text: chunk.text, pause: chunk.pause, fade: chunk.fade, idx: chunkCount++ })
+    })
+  }
+})
+
 export default function AntiLandingPage() {
-  const [count, setCount] = useState(0)
-  const [revealed, setRevealed] = useState(false)
-  const [skipped, setSkipped] = useState(false)
-  const bottomRef = useRef(null)
-  const timerRef = useRef(null)
+  const [step, setStep] = useState(0)
+  const [ctaVisible, setCtaVisible] = useState(false)
 
-  // Auto-advance lines on a timer
   useEffect(() => {
-    if (count >= lines.length) return
-    const current = lines[count]
-    if (current?.type === 'reveal') { setRevealed(true); return }
-
-    timerRef.current = setTimeout(() => {
-      setCount(c => c + 1)
-    }, current.pause)
-
-    return () => clearTimeout(timerRef.current)
-  }, [count])
-
-  // Keep latest line in view
-  useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    if (step >= sequence.length) return
+    const entry = sequence[step]
+    if (entry.type === 'cta') {
+      const t = setTimeout(() => { setCtaVisible(true); setStep(s => s + 1) }, entry.pause)
+      return () => clearTimeout(t)
     }
-  }, [count])
+    const timer = setTimeout(() => setStep(s => s + 1), entry.pause)
+    return () => clearTimeout(timer)
+  }, [step])
 
-  // Scroll down = reveal everything instantly
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50 && !skipped) {
-        setSkipped(true)
-        clearTimeout(timerRef.current)
-        // Show all lines at once
-        setCount(lines.length - 1)
-        setRevealed(true)
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [skipped])
-
-  const visible = lines.slice(0, count).filter(l => !l.type)
+  const revealed = sequence.slice(0, step).filter(e => e.type === 'chunk').length
+  const ctaEntry = sequence.find(e => e.type === 'cta')
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <div className="max-w-lg mx-auto px-6 pt-[40vh] pb-20 text-center space-y-3">
-        {visible.map((line, i) => (
-          line.text === ''
-            ? <div key={i} className={line.style} />
-            : <p key={i} className={`${line.style} animate-fade-in`}>{line.text}</p>
-        ))}
-        <div ref={bottomRef} />
+    <div className="h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center px-6 overflow-hidden">
+      <div className="max-w-lg text-center space-y-2">
+        {rows.map((row, rowIdx) => {
+          if (row.spacer || row.cta) return row.spacer ? <div key={rowIdx} className={row.spacer} /> : null
+          return (
+            <p key={rowIdx} className={row.style}>
+              {row.chunks.map((chunk, i) => {
+                const global = sequence.find(e => e.type === 'chunk' && e.rowIdx === rowIdx && e.text === chunk.text)
+                const visible = global && global.idx < revealed
+                return (
+                  <span
+                    key={i}
+                    className={`transition-opacity ease-out ${visible ? 'opacity-100' : 'opacity-0'}`}
+                    style={{ transitionDuration: `${chunk.fade}ms` }}
+                  >
+                    {i > 0 && ' '}{chunk.text}
+                  </span>
+                )
+              })}
+            </p>
+          )
+        })}
       </div>
 
-      <div className={`transition-all duration-1000 ${revealed ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <div className="flex flex-col items-center justify-center px-6 py-16 text-center space-y-4">
-          <p className="text-3xl sm:text-5xl text-neutral-200 font-light tracking-tight">Sotto</p>
-          <p className="text-neutral-500 text-sm max-w-xs mx-auto mt-4">
-            An AI that lives on your phone, reads your notifications,
-            and speaks up only when it has something worth saying.
-          </p>
-          <div className="pt-8">
-            <a href="/#beta" className="text-neutral-300 border border-neutral-700 px-6 py-3 rounded-full text-sm hover:bg-neutral-800 transition-colors">
-              Let Sotto remember for you
-            </a>
-          </div>
-          <p className="text-neutral-700 text-xs mt-6">Android beta. Waitlist open.</p>
+      <div
+        className={`mt-10 text-center transition-opacity ${ctaVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        style={{ transitionDuration: `${ctaEntry?.fade ?? 1000}ms` }}
+      >
+        <p className="text-2xl sm:text-4xl text-neutral-200 font-light tracking-tight">Sotto</p>
+        <p className="text-neutral-500 text-xs sm:text-sm max-w-xs mx-auto mt-3">
+          An AI that lives on your phone, reads your notifications,
+          and speaks up only when it has something worth saying.
+        </p>
+        <div className="pt-5">
+          <a href="/#beta" className="text-neutral-300 border border-neutral-700 px-5 py-2.5 rounded-full text-sm hover:bg-neutral-800 transition-colors">
+            Let Sotto remember for you
+          </a>
         </div>
+        <p className="text-neutral-700 text-xs mt-4">Android beta. Waitlist open.</p>
       </div>
-
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fadeIn 0.6s ease-out forwards;
-        }
-      `}</style>
     </div>
   )
 }
